@@ -69,7 +69,7 @@
 	                            <div id="progressbar"></div>
 	                        </div>
 	                        <!-- /top-wizard -->
-	                        <form id="wrapped" method="POST" autocomplete="off">
+	                        <form id="wrapped" method="Dialog" autocomplete="off">
 	                            <input id="website" name="website" type="text" value="">
 	                            <!-- Leave for security protection, read docs for details -->
 	                            <div id="middle-wizard">
@@ -103,45 +103,56 @@
 	                                </div>
 	                                <!-- /step 1-->
 									{% for statement in indicator.questions.all %}
+									{% if forloop.last%}
+									<div class="submit step">
+									{% else %}
 	                                <div class="step">
-	                                    <h3 class="main_question mb-4"><strong>2 of 5</strong>Would you reccomend our company?</h3>
+									{% endif %}
+	                                    <h3 class="main_question mb-4"><strong>2 of 5</strong>{{statement.statement}}</h3>
 	                                    <div class="review_block">
 	                                        <ul>
 	                                            <li>
 	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="no" name="question_2" class="required" value="No" onchange="getVals(this, 'question_2');">
-	                                                    <label class="radio" for="no"></label>
-	                                                    <label for="no" class="wrapper">No</label>
+	                                                    <input type="radio" id="no{{statement.id}}" name="question_2" class="required" value="No" onchange="getVals(this, 'question_2');">
+	                                                    <label class="radio" for="no{{statement.id}}"></label>
+	                                                    <label for="no{{statement.id}}" class="wrapper">Strongly Agree</label>
 	                                                </div>
 	                                            </li>
 	                                            <li>
 	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="maybe" name="question_2" class="required" value="Maybe" onchange="getVals(this, 'question_2');">
-	                                                    <label class="radio" for="maybe"></label>
-	                                                    <label for="maybe" class="wrapper">Maybe</label>
+	                                                    <input type="radio" id="maybe{{statement.id}}" name="question_2" class="required" value="Maybe" onchange="getVals(this, 'question_2');">
+	                                                    <label class="radio" for="maybe{{statement.id}}"></label>
+	                                                    <label for="maybe{{statement.id}}" class="wrapper">Agree</label>
 	                                                </div>
 	                                            </li>
 	                                            <li>
 	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="probably" name="question_2" class="required" value="Probably" onchange="getVals(this, 'question_2');">
-	                                                    <label class="radio" for="probably"></label>
-	                                                    <label for="probably" class="wrapper">Probably</label>
+	                                                    <input type="radio" id="probably{{statement.id}}" name="question_2" class="required" value="Probably" onchange="getVals(this, 'question_2');">
+	                                                    <label class="radio" for="probably{{statement.id}}"></label>
+	                                                    <label for="probably{{statement.id}}" class="wrapper">Neutral</label>
 	                                                </div>
 	                                            </li>
 	                                            <li>
+	                                                <div class="checkbox_radio_container">
+	                                                    <input type="radio" id="sure{{statement.id}}" name="question_2" class="required" value="Sure" onchange="getVals(this, 'question_2');">
+	                                                    <label class="radio" for="sure{{statement.id}}"></label>
+	                                                    <label for="sure{{statement.id}}" class="wrapper">Disagree</label>
+	                                                </div>
+												</li>
+												<li>
 	                                                <div class="checkbox_radio_container">
 	                                                    <input type="radio" id="sure" name="question_2" class="required" value="Sure" onchange="getVals(this, 'question_2');">
 	                                                    <label class="radio" for="sure"></label>
-	                                                    <label for="sure" class="wrapper">100% Sure</label>
+	                                                    <label for="sure" class="wrapper">Strongly Disagree</label>
 	                                                </div>
 	                                            </li>
 	                                        </ul>
 	                                    </div>
-	                                    <!-- /review_block-->
-	                                    <div class="form-group">
+										<!-- /review_block-->
+	                                    <!-- <div class="form-group">
 	                                        <label for="additional_message_2_label">Additional message</label>
 	                                        <textarea name="additional_message_2" id="additional_message_2_label" class="form-control" style="height:120px;" onkeyup="getVals(this, 'additional_message_2');"></textarea>
-	                                    </div>
+	                                    </div> -->
 	                                </div>
 									<!-- /step 2-->
 									{% endfor %}
