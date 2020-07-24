@@ -5,17 +5,26 @@ class Indicator(models.Model):
     code = models.CharField(max_length=5,null=True)
     name = models.CharField(max_length=50,null=True)
     question = models.CharField(max_length=100,null=True)
+    resource_title = models.CharField(max_length=100,null=True)
+    resource_document = models.TextField(null=True)
 
     def __str__(self):
-        return self.name
-
+        return str(self.code)+" : "+str(self.name)
+ 
 
 class IndicatorStatement(models.Model):
     indicator = models.ForeignKey(Indicator,null=True,on_delete=models.CASCADE,related_name="questions")
     statement = models.TextField(null=True)
 
+    def __str__(self):
+        return str(self.indicator.code)+" : "+str(self.statement)
 
-# class Option(models.Model):
-#     option = models.
+
+
+class Resource(models.Model):
+    resource = models.ForeignKey(IndicatorStatement,null=True,on_delete=models.CASCADE,related_name="resources")
+    title = models.CharField(max_length=100,null=True)
+    document = models.TextField(null=True)
+
 
 
