@@ -7,5 +7,5 @@ urlpatterns = [
     url(r'^accounts/forgot-password/$', views.forgot, name="forgot"),
     url(r'^accounts/register/$', views.register, name="register"),
     url(r'^accounts/index/$', views.index, name="index"),
-    url(r'^accounts/test/$', views.test, name="test"),
+    url(r'^accounts/test/(?P<number>[-\w]+)/$', views.test, name="test"),
 ]

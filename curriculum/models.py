@@ -6,6 +6,9 @@ class Indicator(models.Model):
     name = models.CharField(max_length=50,null=True)
     question = models.CharField(max_length=100,null=True)
 
+    def __str__(self):
+        return self.name
+
 
 class IndicatorStatement(models.Model):
     indicator = models.ForeignKey(Indicator,null=True,on_delete=models.CASCADE,related_name="questions")

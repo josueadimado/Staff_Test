@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
+from curriculum.models import Indicator
 
 # Create your views here.
 def tologin(request):
+    if request.user.is_authenticated:
+        ind = Indicator.objects.first()
+        return redirect('/accounts/test/{}/'.format(ind.id))
     template_name = "accounts/login.html"
     args = {}
     return render(request,template_name,args)
@@ -25,10 +29,12 @@ def index(request):
     args = {}
     return render(request,template_name,args)
 
-def test(request):
+def test(request,number):
     # pull indicators here
     template_name = "accounts/test.html"
+    indicator = Indicator.objects.get(id=int(number))
     args = {}
+    args['indicator'] = indicator
     return render(request,template_name,args)
 
 
@@ -44,7 +50,8 @@ def mylogin(request):
             user = authenticate(request,username=username,password=password)
             if user is not None:
                 login(request,user)
-                return redirect('/accounts/test/')
+                ind = Indicator.objects.first()
+                return redirect('/accounts/test/{}/'.format(ind.id))
             else:
                 messages.error(request,"Please check username and password well")
                 return redirect('/accounts/login/')
