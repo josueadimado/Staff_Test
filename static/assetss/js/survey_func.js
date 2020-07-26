@@ -1,6 +1,9 @@
 	/*  Wizard */
 	jQuery(function ($) {
 		"use strict";
+		function exists(ele){
+			if (ele !== null && ele !== undefined){return true}else{return false}
+		}
 		$('form#wrapped').attr('action', '');
 		$("#wizard_container").wizard({
 			stepsWrapper: "#wrapped",
@@ -28,6 +31,25 @@
 		$("#wizard_container").wizard({
 			afterSelect: function (event, state) {
 				$("#progressbar").progressbar("value", state.percentComplete);
+				if(window.value === "Yes"){
+					$("#verify").removeClass("required");
+					$("#verify").addClass("required");
+				}else if(window.value === "No"){
+					var url = window.location.pathname
+					var current = url.split("/")[3]
+					window.location.href = "/accounts/test/"+window.next+"/"
+					$("#verify").removeClass("required");
+					window.scores[window.indicator] = 0;
+					localStorage.setItem("scores",JSON.stringify(window.scores));
+					
+				}else{
+					if(exists(window.scores[window.name])){
+						window.scores[window.name] = (window.scores[window.name] +parseInt(window.value)) 
+					}else{
+						window.scores[window.name] = parseInt(window.value)
+					}
+					console.log(window.name,window.value)
+				}
 				$("#location").text("(" + state.stepsComplete + "/" + state.stepsPossible + ")");
 			}
 		});
@@ -56,6 +78,14 @@ function getVals(formControl, controlType) {
 		case 'question_1':
 			// Get the value for a radio
 			var value = $(formControl).val();
+			// console.log(value);
+			window.value = value;
+			if(window.value === "Yes"){
+				$("#verify").removeClass("required");
+				$("#verify").addClass("required");
+			}else{
+				$("#verify").removeClass("required");
+			}
 			$("#question_1").text(value);
 			break;
 
@@ -67,7 +97,11 @@ function getVals(formControl, controlType) {
 
 		case 'question_2':
 			// Get the value for a radio
+			var name = $(formControl).prop('name');
 			var value = $(formControl).val();
+			console.log(value)
+			window.value = value;
+			window.name = name;
 			$("#question_2").text(value);
 			break;
 

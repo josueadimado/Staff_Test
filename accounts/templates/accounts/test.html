@@ -75,19 +75,19 @@
 	                            <div id="middle-wizard">
 
 	                                <div class="step">
-	                                    <h3 class="main_question"><strong>1 of 5</strong>{{indicator.question}}</h3>
+	                                    <h3 class="main_question">{{indicator.question}}</h3>
 	                                    <div class="review_block">
 	                                        <ul>
 	                                            <li>
 	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="poor_1" name="question_1" class="required" value="Poor" onchange="getVals(this, 'question_1');">
+	                                                    <input type="radio" id="poor_1" name="question_1" class="required" value="Yes" onchange="getVals(this, 'question_1');">
 	                                                    <label class="radio" for="poor_1"></label>
 	                                                    <label for="poor_1" class="wrapper">Yes</label>
 	                                                </div>
 	                                            </li>
 	                                            <li>
 	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="average_1" name="question_1" class="required" value="Average" onchange="getVals(this, 'question_1');">
+	                                                    <input type="radio" id="average_1" name="question_1" class="required" value="No" onchange="getVals(this, 'question_1');">
 	                                                    <label class="radio" for="average_1"></label>
 	                                                    <label for="average_1" class="wrapper">No</label>
 	                                                </div>
@@ -96,7 +96,7 @@
 	                                    </div>
                                         <div class="form-group terms">
 	                                        <label class="container_check">Please verify  <a href="#" data-toggle="modal" data-target="#terms-txt" style="color:#fff; text-decoration: underline;">Document</a>
-	                                            <input type="checkbox" name="terms" value="Yes" class="required">
+	                                            <input type="checkbox" name="terms" id="verify" value="Yes" class="required">
 	                                            <span class="checkmark"></span>
 	                                        </label>
 	                                    </div>
@@ -108,42 +108,42 @@
 									{% else %}
 	                                <div class="step">
 									{% endif %}
-	                                    <h3 class="main_question mb-4"><strong>2 of 5</strong>{{statement.statement}}</h3>
+	                                    <h3 class="main_question mb-4">{{statement.statement}}</h3>
 	                                    <div class="review_block">
 	                                        <ul>
 	                                            <li>
 	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="no{{statement.id}}" name="question_2" class="required" value="No" onchange="getVals(this, 'question_2');">
+	                                                    <input type="radio" id="no{{statement.id}}" name="{{statement.indicator.code}}" class="required" value="5" onchange="getVals(this, 'question_2');">
 	                                                    <label class="radio" for="no{{statement.id}}"></label>
 	                                                    <label for="no{{statement.id}}" class="wrapper">Strongly Agree</label>
 	                                                </div>
 	                                            </li>
 	                                            <li>
 	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="maybe{{statement.id}}" name="question_2" class="required" value="Maybe" onchange="getVals(this, 'question_2');">
+	                                                    <input type="radio" id="maybe{{statement.id}}" name="{{statement.indicator.code}}" class="required" value="4" onchange="getVals(this, 'question_2');">
 	                                                    <label class="radio" for="maybe{{statement.id}}"></label>
 	                                                    <label for="maybe{{statement.id}}" class="wrapper">Agree</label>
 	                                                </div>
 	                                            </li>
 	                                            <li>
 	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="probably{{statement.id}}" name="question_2" class="required" value="Probably" onchange="getVals(this, 'question_2');">
+	                                                    <input type="radio" id="probably{{statement.id}}" name="{{statement.indicator.code}}" class="required" value="3" onchange="getVals(this, 'question_2');">
 	                                                    <label class="radio" for="probably{{statement.id}}"></label>
 	                                                    <label for="probably{{statement.id}}" class="wrapper">Neutral</label>
 	                                                </div>
 	                                            </li>
 	                                            <li>
 	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="sure{{statement.id}}" name="question_2" class="required" value="Sure" onchange="getVals(this, 'question_2');">
+	                                                    <input type="radio" id="sure{{statement.id}}" name="{{statement.indicator.code}}" class="required" value="2" onchange="getVals(this, 'question_2');">
 	                                                    <label class="radio" for="sure{{statement.id}}"></label>
 	                                                    <label for="sure{{statement.id}}" class="wrapper">Disagree</label>
 	                                                </div>
 												</li>
 												<li>
 	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="sure" name="question_2" class="required" value="Sure" onchange="getVals(this, 'question_2');">
-	                                                    <label class="radio" for="sure"></label>
-	                                                    <label for="sure" class="wrapper">Strongly Disagree</label>
+	                                                    <input type="radio" id="there{{statement.id}}" name="{{statement.indicator.code}}" class="required" value="1" onchange="getVals(this, 'question_2');">
+	                                                    <label class="radio" for="there{{statement.id}}"></label>
+	                                                    <label for="there{{statement.id}}" class="wrapper">Strongly Disagree</label>
 	                                                </div>
 	                                            </li>
 	                                        </ul>
@@ -342,6 +342,21 @@
 
 <!-- Wizard script -->
 <script src="/static/assetss/js/survey_func.js"></script>
+<script>
+	window.indicator = "{{indicator.code}}";
+	window.next = "{{next}}";
+	function exists(ele){
+		if (ele !== null && ele !== undefined){return true}else{return false}
+	}
+	var myscore = localStorage.getItem("scores");
+	if (exists(myscore)){
+		window.scores = JSON.parse(myscore)
+	}else{
+	window.scores = {}
+	};
+
+</script>
+
 
 </body>
 </html>
