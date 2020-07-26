@@ -44,11 +44,11 @@
 					
 				}else{
 					if(exists(window.scores[window.name])){
-						window.scores[window.name] = (window.scores[window.name] +parseInt(window.value)) 
+						window.scores[window.name] = (parseInt(window.scores[window.name]) + parseInt(window.value)) 
 					}else{
 						window.scores[window.name] = parseInt(window.value)
 					}
-					console.log(window.name,window.value)
+					console.log(window.scores[window.name])
 				}
 				$("#location").text("(" + state.stepsComplete + "/" + state.stepsPossible + ")");
 			}

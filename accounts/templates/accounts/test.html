@@ -362,7 +362,13 @@
 	}
 	var myscore = localStorage.getItem("scores");
 	if (exists(myscore)){
-		window.scores = JSON.parse(myscore)
+		var url = window.location.pathname
+		var current = url.split("/")[3]
+		if(current === "A1"){
+			window.scores = {}
+		}else{		
+			window.scores = JSON.parse(myscore)
+		}
 	}else{
 	window.scores = {}
 	};

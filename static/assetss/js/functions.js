@@ -21,6 +21,7 @@
 		}else{
 			window.scores[window.name] = parseInt(window.value);
 		}
+		console.log(window.scores[window.name],window.total)
 		window.scores[window.name] = (window.scores[window.name]/window.total)
 		localStorage.setItem("scores",JSON.stringify(window.scores));
 		console.log(window.scores);
