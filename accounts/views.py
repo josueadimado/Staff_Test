@@ -7,7 +7,7 @@ from curriculum.models import Indicator
 def tologin(request):
     if request.user.is_authenticated:
         ind = Indicator.objects.first()
-        return redirect('/accounts/test/{}/'.format(ind.id))
+        return redirect('/accounts/test/{}/'.format(ind.code))
     template_name = "accounts/login.html"
     args = {}
     return render(request,template_name,args)
@@ -29,13 +29,39 @@ def index(request):
     args = {}
     return render(request,template_name,args)
 
-def test(request,number):
+def next(li,element):
+    running = True
+    idx = li.index(element)
+    while running:
+        thiselem = li[idx]
+        idx = (idx + 1) % len(li)
+        nextelem = li[idx]
+        if idx == (len(li) - 1):
+            return [nextelem,True]
+        return [nextelem,False]
+
+
+def test(request,code):
     # pull indicators here
     template_name = "accounts/test.html"
-    indicator = Indicator.objects.get(id=int(number))
+    all_ids = [i.code for i in Indicator.objects.all()]
+    all_ids.insert(0,"first")
+    my_next = next(all_ids,code)
+    try:
+        indicator = Indicator.objects.get(code=code)
+    except:
+        return redirect("/accounts/results/")
     args = {}
     args['indicator'] = indicator
+    args['next'] = my_next[0]
+    # args['total'] = len(indicator.questions.all())
     return render(request,template_name,args)
+
+
+def results(request):
+    template = "accounts/results.html"
+    args = {}
+    return render(request,template,args)
 
 
 def mylogin(request):
@@ -51,7 +77,7 @@ def mylogin(request):
             if user is not None:
                 login(request,user)
                 ind = Indicator.objects.first()
-                return redirect('/accounts/test/{}/'.format(ind.id))
+                return redirect('/accounts/test/{}/'.format(ind.code))
             else:
                 messages.error(request,"Please check username and password well")
                 return redirect('/accounts/login/')

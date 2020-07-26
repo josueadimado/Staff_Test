@@ -57,8 +57,8 @@
 	            <div class="row justify-content-between">
 	                <div class="col-xl-6 col-lg-6 d-flex align-items-center">
 	                    <div class="main_title_1">
-	                        <h3>{{indicator.name}}</h3>
-	                        <p>Indicator {{indicator.code}}</p>
+	                        <h3>Results Page</h3>
+	                        <p>Thank you for taking the test</p>
 	                        <!-- <p><em>- The Satisfyc Team</em></p> -->
 	                    </div>
 	                </div>
@@ -75,87 +75,10 @@
 	                            <div id="middle-wizard">
 
 	                                <div class="step">
-	                                    <h3 class="main_question">{{indicator.question}}</h3>
-	                                    <div class="review_block">
-	                                        <ul>
-	                                            <li>
-	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="poor_1" name="question_1" class="required" value="Yes" onchange="getVals(this, 'question_1');">
-	                                                    <label class="radio" for="poor_1"></label>
-	                                                    <label for="poor_1" class="wrapper">Yes</label>
-	                                                </div>
-	                                            </li>
-	                                            <li>
-	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="average_1" name="question_1" class="required" value="No" onchange="getVals(this, 'question_1');">
-	                                                    <label class="radio" for="average_1"></label>
-	                                                    <label for="average_1" class="wrapper">No</label>
-	                                                </div>
-	                                            </li>
-	                                        </ul>
-	                                    </div>
-                                        <div class="form-group terms">
-	                                        <label class="container_check">Please verify  <a href="#" data-toggle="modal" data-target="#terms-txt" style="color:#fff; text-decoration: underline;">Document</a>
-	                                            <input type="checkbox" name="terms" id="verify" value="Yes" class="required">
-	                                            <span class="checkmark"></span>
-	                                        </label>
-	                                    </div>
+	                                    <h3 class="main_question"></h3>
+	                                    We will give your results in a nice way...Congrats
 	                                </div>
-	                                <!-- /step 1-->
-									{% for statement in indicator.questions.all %}
-									{% if forloop.last%}
-									<div class="submit step">
-									{% else %}
-	                                <div class="step">
-									{% endif %}
-	                                    <h3 class="main_question mb-4">{{statement.statement}}</h3>
-	                                    <div class="review_block">
-	                                        <ul>
-	                                            <li>
-	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="no{{statement.id}}" name="{{statement.indicator.code}}" class="required" value="5" onchange="getVals(this, 'question_2');">
-	                                                    <label class="radio" for="no{{statement.id}}"></label>
-	                                                    <label for="no{{statement.id}}" class="wrapper">Strongly Agree</label>
-	                                                </div>
-	                                            </li>
-	                                            <li>
-	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="maybe{{statement.id}}" name="{{statement.indicator.code}}" class="required" value="4" onchange="getVals(this, 'question_2');">
-	                                                    <label class="radio" for="maybe{{statement.id}}"></label>
-	                                                    <label for="maybe{{statement.id}}" class="wrapper">Agree</label>
-	                                                </div>
-	                                            </li>
-	                                            <li>
-	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="probably{{statement.id}}" name="{{statement.indicator.code}}" class="required" value="3" onchange="getVals(this, 'question_2');">
-	                                                    <label class="radio" for="probably{{statement.id}}"></label>
-	                                                    <label for="probably{{statement.id}}" class="wrapper">Neutral</label>
-	                                                </div>
-	                                            </li>
-	                                            <li>
-	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="sure{{statement.id}}" name="{{statement.indicator.code}}" class="required" value="2" onchange="getVals(this, 'question_2');">
-	                                                    <label class="radio" for="sure{{statement.id}}"></label>
-	                                                    <label for="sure{{statement.id}}" class="wrapper">Disagree</label>
-	                                                </div>
-												</li>
-												<li>
-	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="there{{statement.id}}" name="{{statement.indicator.code}}" class="required" value="1" onchange="getVals(this, 'question_2');">
-	                                                    <label class="radio" for="there{{statement.id}}"></label>
-	                                                    <label for="there{{statement.id}}" class="wrapper">Strongly Disagree</label>
-	                                                </div>
-	                                            </li>
-	                                        </ul>
-	                                    </div>
-										<!-- /review_block-->
-	                                    <!-- <div class="form-group">
-	                                        <label for="additional_message_2_label">Additional message</label>
-	                                        <textarea name="additional_message_2" id="additional_message_2_label" class="form-control" style="height:120px;" onkeyup="getVals(this, 'additional_message_2');"></textarea>
-	                                    </div> -->
-	                                </div>
-									<!-- /step 2-->
-									{% endfor %}
+
 
 	                                <!-- <div class="step">
 	                                    <h3 class="main_question"><strong>3 of 5</strong>How did you hear about us?</h3>
@@ -279,11 +202,7 @@
 	                            </div>
 	                            <!-- /middle-wizard -->
 
-	                            <div id="bottom-wizard">
-	                                <button type="button" name="backward" class="backward">Prev</button>
-	                                <button type="button" name="forward" class="forward">Next</button>
-	                                <button type="submit" name="process" class="submit">Submit</button>
-	                            </div>
+	                    
 	                            <!-- /bottom-wizard -->
 
 	                        </form>
@@ -342,21 +261,5 @@
 
 <!-- Wizard script -->
 <script src="/static/assetss/js/survey_func.js"></script>
-<script>
-	window.indicator = "{{indicator.code}}";
-	window.next = "{{next}}";
-	function exists(ele){
-		if (ele !== null && ele !== undefined){return true}else{return false}
-	}
-	var myscore = localStorage.getItem("scores");
-	if (exists(myscore)){
-		window.scores = JSON.parse(myscore)
-	}else{
-	window.scores = {}
-	};
-
-</script>
-
-
 </body>
 </html>
