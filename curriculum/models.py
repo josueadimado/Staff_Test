@@ -3,9 +3,9 @@ from django.db import models
 # Create your models here.
 class Indicator(models.Model):
     code = models.CharField(max_length=5,null=True)
-    name = models.CharField(max_length=50,null=True)
-    question = models.CharField(max_length=100,null=True)
-    resource_title = models.CharField(max_length=100,null=True)
+    name = models.CharField(max_length=100,null=True)
+    question = models.CharField(max_length=500,null=True)
+    resource_title = models.CharField(max_length=500,null=True)
     resource_document = models.TextField(null=True)
 
     def __str__(self):
