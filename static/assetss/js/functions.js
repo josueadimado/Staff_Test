@@ -17,11 +17,11 @@
 	// This will be used when the person finally submits a form
 	$('form#wrapped').on('submit', function () {
 		if(exists(window.scores[window.name])){
-			window.scores[window.name] = (window.scores[window.name] +parseInt(window.value)) 
+			window.scores[window.name] = (window.scores[window.name]+parseInt(window.value)) 
 		}else{
 			window.scores[window.name] = parseInt(window.value);
 		}
-		window.scores[window.name] = window.scores[window.name]
+		window.scores[window.name] = (window.scores[window.name]/window.total)
 		localStorage.setItem("scores",JSON.stringify(window.scores));
 		console.log(window.scores);
 		var form = $("form#wrapped");

@@ -23,3 +23,9 @@ urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'^', include("accounts.urls")),
 ]
+# This is not right for a production server but ah well.
+urlpatterns += [
+    re_path(r'^media/(?P<path>.*)$', serve, {
+        'document_root': settings.MEDIA_ROOT,
+    }),
+]

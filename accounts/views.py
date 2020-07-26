@@ -54,7 +54,7 @@ def test(request,code):
     args = {}
     args['indicator'] = indicator
     args['next'] = my_next[0]
-    # args['total'] = len(indicator.questions.all())
+    args['total'] = len(indicator.questions.all())
     return render(request,template_name,args)
 
 

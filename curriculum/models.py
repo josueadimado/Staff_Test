@@ -22,9 +22,9 @@ class IndicatorStatement(models.Model):
 
 
 class Resource(models.Model):
-    resource = models.ForeignKey(IndicatorStatement,null=True,on_delete=models.CASCADE,related_name="resources")
+    statement = models.ForeignKey(IndicatorStatement,null=True,on_delete=models.CASCADE,related_name="resources")
     title = models.CharField(max_length=100,null=True)
-    document = models.TextField(null=True)
+    document = models.FileField(upload_to="uploads/docs/",null=True,blank=True)
 
 
 

@@ -103,45 +103,56 @@
 	                                </div>
 	                                <!-- /step 1-->
 									{% for statement in indicator.questions.all %}
+									
 									{% if forloop.last%}
 									<div class="submit step">
+										
 									{% else %}
 	                                <div class="step">
 									{% endif %}
+									{% for doc in statement.resources.all %}
+									<div class="form-group terms">
+										<label class="container_check">Please read and verify this  <a href="{{doc.document.url}}" target="_" style="color:#fff; text-decoration: underline;">Document</a> to score the statements that follow 
+											<input type="checkbox" name="doc" id="doc" value="Yes" class="required" required="required">
+											<span class="checkmark"></span>
+										</label>
+									</div>
+									{% endfor%}
 	                                    <h3 class="main_question mb-4">{{statement.statement}}</h3>
-	                                    <div class="review_block">
+										
+										<div class="review_block">
 	                                        <ul>
 	                                            <li>
 	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="no{{statement.id}}" name="{{statement.indicator.code}}" class="required" value="5" onchange="getVals(this, 'question_2');">
+	                                                    <input required="required" type="radio" id="no{{statement.id}}" name="{{statement.indicator.code}}" class="required" value="5" onchange="getVals(this, 'question_2');">
 	                                                    <label class="radio" for="no{{statement.id}}"></label>
 	                                                    <label for="no{{statement.id}}" class="wrapper">Strongly Agree</label>
 	                                                </div>
 	                                            </li>
 	                                            <li>
 	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="maybe{{statement.id}}" name="{{statement.indicator.code}}" class="required" value="4" onchange="getVals(this, 'question_2');">
+	                                                    <input required="required" type="radio" id="maybe{{statement.id}}" name="{{statement.indicator.code}}" class="required" value="4" onchange="getVals(this, 'question_2');">
 	                                                    <label class="radio" for="maybe{{statement.id}}"></label>
 	                                                    <label for="maybe{{statement.id}}" class="wrapper">Agree</label>
 	                                                </div>
 	                                            </li>
 	                                            <li>
 	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="probably{{statement.id}}" name="{{statement.indicator.code}}" class="required" value="3" onchange="getVals(this, 'question_2');">
+	                                                    <input required="required" type="radio" id="probably{{statement.id}}" name="{{statement.indicator.code}}" class="required" value="3" onchange="getVals(this, 'question_2');">
 	                                                    <label class="radio" for="probably{{statement.id}}"></label>
 	                                                    <label for="probably{{statement.id}}" class="wrapper">Neutral</label>
 	                                                </div>
 	                                            </li>
 	                                            <li>
 	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="sure{{statement.id}}" name="{{statement.indicator.code}}" class="required" value="2" onchange="getVals(this, 'question_2');">
+	                                                    <input required="required" type="radio" id="sure{{statement.id}}" name="{{statement.indicator.code}}" class="required" value="2" onchange="getVals(this, 'question_2');">
 	                                                    <label class="radio" for="sure{{statement.id}}"></label>
 	                                                    <label for="sure{{statement.id}}" class="wrapper">Disagree</label>
 	                                                </div>
 												</li>
 												<li>
 	                                                <div class="checkbox_radio_container">
-	                                                    <input type="radio" id="there{{statement.id}}" name="{{statement.indicator.code}}" class="required" value="1" onchange="getVals(this, 'question_2');">
+	                                                    <input required="required" type="radio" id="there{{statement.id}}" name="{{statement.indicator.code}}" class="required" value="1" onchange="getVals(this, 'question_2');">
 	                                                    <label class="radio" for="there{{statement.id}}"></label>
 	                                                    <label for="there{{statement.id}}" class="wrapper">Strongly Disagree</label>
 	                                                </div>
@@ -343,6 +354,7 @@
 <!-- Wizard script -->
 <script src="/static/assetss/js/survey_func.js"></script>
 <script>
+	window.total = parseInt("{{total}}");
 	window.indicator = "{{indicator.code}}";
 	window.next = "{{next}}";
 	function exists(ele){

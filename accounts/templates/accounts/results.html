@@ -84,7 +84,7 @@
                 <div class="container page__container">
                     <div class="page-headline text-center">
                         <h2>Here are your results</h2>
-                        <p class="lead measure-lead mx-auto text-70">The results are calculated as a mean for all the sessions combine</p>
+                        <p class="lead measure-lead mx-auto text-70">The results are calculated as a mean for all the sessions combined</p>
                     </div>
                 </div>
             </div>
@@ -93,7 +93,7 @@
             <div class=" page-section">
                 <div class="container page__container">
                     <div class="row card-group-row">
-                        <div class="col-md-6 card-group-row__col">
+                        <div class="col-md-4 card-group-row__col">
 
                             <div class="card card--elevated card-group-row__card">
                                 <div class="card-body d-flex">
@@ -102,7 +102,7 @@
                                     </span>
                                     <div class="flex">
                                         <a class="card-title mb-8pt" href="#">Indicator A</a>
-                                        <p class="text-70 mb-0">Result goes here</p>
+                                        <p class="text-70 mb-0" id="result-a">Result goes here</p>
                                     </div>
                                 </div>
                                 <div class="card-footer d-flex lh-1 px-16pt py-8pt">
@@ -112,7 +112,7 @@
 
                         </div>
 
-                         <div class="col-md-6 card-group-row__col">
+                         <div class="col-md-4 card-group-row__col">
 
                             <div class="card card--elevated card-group-row__card">
                                 <div class="card-body d-flex">
@@ -120,8 +120,26 @@
                                         <i class="material-icons"></i>
                                     </span>
                                     <div class="flex">
-                                        <a class="card-title mb-8pt" href="#">Indicator A</a>
-                                        <p class="text-70 mb-0">Result goes here</p>
+                                        <a class="card-title mb-8pt" href="#">Indicator B</a>
+                                        <p class="text-70 mb-0" id="result-b">Result goes here</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex lh-1 px-16pt py-8pt">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 card-group-row__col">
+
+                            <div class="card card--elevated card-group-row__card">
+                                <div class="card-body d-flex">
+                                    <span class="icon-holder icon-holder--outline-muted rounded-circle d-inline-flex mr-16pt">
+                                        <i class="material-icons"></i>
+                                    </span>
+                                    <div class="flex">
+                                        <a class="card-title mb-8pt" href="#">Indicator C</a>
+                                        <p class="text-70 mb-0" id="result-c">Result goes here</p>
                                     </div>
                                 </div>
                                 <div class="card-footer d-flex lh-1 px-16pt py-8pt">
@@ -131,6 +149,31 @@
 
                         </div>
                 
+                    </div>
+                </div>
+            </div>
+
+            <div class=" page-section">
+                <div class="container page__container">
+                    <div class="row card-group-row">
+                        <div class="col-md-12 card-group-row__col">
+
+                            <div class="card card--elevated card-group-row__card">
+                                <div class="card-body d-flex">
+                                    <span class="icon-holder icon-holder--outline-muted rounded-circle d-inline-flex mr-16pt">
+                                        <i class="material-icons"></i>
+                                    </span>
+                                    <div class="flex">
+                                        <a class="card-title mb-8pt" href="#">Total Achievement</a>
+                                        <p class="text-70 mb-0" id="total">Result goes here</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex lh-1 px-16pt py-8pt">
+
+                                </div>
+                            </div>
+
+                        </div>                
                     </div>
                 </div>
             </div>
@@ -186,7 +229,41 @@
     <!-- App JS -->
     <script src="/static/assets/js/app.js"></script>
 
-
+    <script>
+        function exists(ele){
+			if (ele !== null && ele !== undefined){return true}else{return false}
+        }
+        var results = {}
+        var scores = JSON.parse(localStorage.getItem('scores'))
+        if(exists(scores)){
+            for (let [key, value] of Object.entries(scores)) {
+                if(exists(results[key[0]])){
+                    results[key[0]] = (results[key[0]] +parseInt(value)) 
+                    results[key[0]+'-total']++
+                }else{
+                    results[key[0]] = parseInt(value)
+                    results[key[0]+'-total'] = 1
+                }
+            }
+        // calculating means now
+            console.log(results)
+            var final = {}
+            final['A'] = results['A']/results['A-total'];
+            final['B'] = results['B']/results['B-total'];
+            final['C'] = results['C']/results['C-total'];
+            $("#result-a").html(`A mean of <strong>${final['A']}</strong>`)
+            $("#result-b").html(`A mean of <strong>${final['B']}</strong>`)
+            $("#result-c").html(`A mean of <strong>${final['C']}</strong>`)
+            var total = 0;
+            for (let [key, value] of Object.entries(final)) {
+                total += value
+            }
+            $("#total").html(`You obtained a total mean of <strong>${((total/3).toFixed(2))}</strong> for all three parts`)
+            console.log(final)
+        }else{
+            window.location.href = "/"
+        }
+    </script>
 
 
 </body>
