@@ -7,7 +7,8 @@ from curriculum.models import Indicator
 def tologin(request):
     if request.user.is_authenticated:
         ind = Indicator.objects.first()
-        return redirect('/accounts/test/{}/'.format(ind.code))
+        # return redirect('/accounts/test/{}/'.format(ind.code))
+        return redirect('/accounts/index/')
     template_name = "accounts/login.html"
     args = {}
     return render(request,template_name,args)
@@ -77,7 +78,8 @@ def mylogin(request):
             if user is not None:
                 login(request,user)
                 ind = Indicator.objects.first()
-                return redirect('/accounts/test/{}/'.format(ind.code))
+                # return redirect('/accounts/test/{}/'.format(ind.code))
+                return redirect('/accounts/index/')
             else:
                 messages.error(request,"Please check username and password well")
                 return redirect('/accounts/login/')
