@@ -39,7 +39,7 @@
 					var current = url.split("/")[3]
 					window.location.href = "/accounts/test/"+window.next+"/"
 					$("#verify").removeClass("required");
-					window.scores[window.indicator] = 0;
+					window.scores[window.indicator] = 1;
 					localStorage.setItem("scores",JSON.stringify(window.scores));
 					
 				}else{
