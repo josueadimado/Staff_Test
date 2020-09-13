@@ -1,7 +1,11 @@
 from django.db import models
 
+class Section(models.Model):
+    name = models.CharField(max_length=20)
+
 # Create your models here.
 class Indicator(models.Model):
+    section = models.ForeignKey(Section,null=True,on_delete=models.CASCADE,related_name="indicators")
     code = models.CharField(max_length=5,null=True)
     name = models.CharField(max_length=100,null=True)
     question = models.CharField(max_length=500,null=True)
