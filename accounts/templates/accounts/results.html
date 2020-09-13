@@ -327,16 +327,16 @@
         
         function getExplanation(mean){
             if(mean >= 4.20){
-                return "This is indicative of an exceptional standard of achievement for the respective indicator, not requiring any amendment."
+                return `<p style="color:green;">This is indicative of an exceptional standard of achievement for the respective indicator, not requiring any amendment.</p>`
             }
             if(mean >= 3.40 && mean <= 4.19){
-                return "This is indicative of a satisfactory standard of achievement for the respective indicator, not requiring any amendment."
+                return `<p style="color:blue;">This is indicative of a satisfactory standard of achievement for the respective indicator, not requiring any amendment.</p>`
             }
             if(mean >= 2.00 && mean <= 3.39){
-                return "This is indicative of poor achievement for the respective indicator, requiring minor corrections."
+                return `<p style="color:orange;">This is indicative of poor achievement for the respective indicator, requiring minor corrections.</p>`
             }
             if(mean < 2.00){
-                return "This is indicative of poor achievement for the respective indicator, requiring major corrections."
+                return `<p style="color:red;">This is indicative of poor achievement for the respective indicator, requiring major corrections.</p>`
             }
         }
         var results = {}
@@ -369,7 +369,7 @@
         // calculating means now
         for (let [k, l] of Object.entries(finalMeans)) {
             $("#result-"+k).html(`A mean of <strong>${finalMeans[''+k]}</strong>`)
-            $("#explain-"+k).html(`<p>${getExplanation(finalMeans[''+k])}</p>`)
+            $("#explain-"+k).html(getExplanation(finalMeans[''+k]))
         }
             var total = 0;
             var count = 0
@@ -378,7 +378,7 @@
                 count += 1;
             }
             $("#total").html(`You obtained a total mean of <strong>${(total/count).toFixed(2)}</strong> for all three parts`)
-            $("#explain-total").html(`<p>${getExplanation((total/count).toFixed(2))}</p>`)
+            $("#explain-total").html(getExplanation((total/count).toFixed(2)))
             console.log(total)
         }else{
             window.location.href = "/"
