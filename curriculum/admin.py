@@ -21,5 +21,6 @@ class StatementAdmin(admin.ModelAdmin):
 
 
 # Register your models here.
+admin.site.register(Section)
 admin.site.register(Indicator,IndicatorAdmin)
 admin.site.register(IndicatorStatement,StatementAdmin)
