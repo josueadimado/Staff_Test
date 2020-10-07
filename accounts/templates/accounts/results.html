@@ -188,6 +188,9 @@
 
 
         <div class="js-fix-footer2 bg-white border-top-2">
+            <div class="container">
+                <textarea placeholder="Please input your comment about the results" rows="3" name="comment" class="form-control"></textarea>
+            </div>
             <div class="container page__container" style="margin-top: 40px;">
                     <div class="page-headline text-center">
                         <h2>Review your scores</h2>
@@ -199,7 +202,7 @@
                         </p>
                     </div>
             </div>
-            <textarea placeholder="Please input your comment about the results" name="comment" class="form-control"></textarea>
+            
             <button class="btn btn-primary" id="print-btn" onclick="myPrint()">Print or Download Page</button>
             <div class="container page__container page-section d-flex flex-column">                
                 <p class="text-50 small mt-n1 mb-0">Copyright {% now 'Y' %} &copy; All rights reserved.</p>
