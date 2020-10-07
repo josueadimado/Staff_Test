@@ -7,5 +7,5 @@ class CustomUserAdmin(UserAdmin):
     pass
 
 # Register your models here.
-admin.site.register(CustomUserAdmin,CustomUser)
+admin.site.register(CustomUser,CustomUserAdmin)
 
