@@ -204,7 +204,7 @@
             </div>
         </div>
 
-
+        <button class="btn btn-primary" onclick="myPrint()">Print or Download Page</button>
     </div>
     <!-- // END Header Layout -->
 
@@ -405,6 +405,10 @@ function makeRequest(data,url){
 function exists(ele){
             if (ele !== null && ele !== undefined){return true}else{return false}
         }
+        function myPrint() {
+            // document.getElementById('print-btn').style.display = "none"
+            window.print();
+            }
     </script>
 
 
