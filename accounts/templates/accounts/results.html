@@ -198,14 +198,15 @@
                         Below 2.00 is indicative of poor achievement for the respective indicator, requiring major corrections.</br>
                         </p>
                     </div>
-                </div>
+            </div>
+            <textarea placeholder="Please input your comment about the results" name="comment" class="form-control"></textarea>
+            <button class="btn btn-primary" id="print-btn" onclick="myPrint()">Print or Download Page</button>
             <div class="container page__container page-section d-flex flex-column">                
                 <p class="text-50 small mt-n1 mb-0">Copyright {% now 'Y' %} &copy; All rights reserved.</p>
             </div>
         </div>
 
-        <button class="btn btn-primary" onclick="myPrint()">Print or Download Page</button>
-    </div>
+            </div>
     <!-- // END Header Layout -->
 
 
@@ -406,7 +407,7 @@ function exists(ele){
             if (ele !== null && ele !== undefined){return true}else{return false}
         }
         function myPrint() {
-            // document.getElementById('print-btn').style.display = "none"
+            document.getElementById('print-btn').style.display = "none"
             window.print();
             }
     </script>
