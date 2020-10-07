@@ -33,7 +33,28 @@
     <!-- App CSS -->
     <link type="text/css" href="/static/assets/css/app.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/morris.js-0.5.1/morris.css" />
-
+    <style>
+         #toast{
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 14px;
+        }
+        #toast.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+    </style>
 
 
 
@@ -182,7 +203,7 @@
 
 
             
-
+            <div id="toast"></div>
         </div>
         <!-- // END Header Layout Content -->
 
@@ -191,8 +212,9 @@
             <div class="container" style="margin-top: 40px;">
                 <label>Comment on the results obtained</label>
                 <textarea placeholder="Please input your comment about the results" rows="3" name="comment" class="form-control"></textarea>
-            </div>
             <p>Comments given by {{user.first_name}} {{user.last_name}}</p>
+            </div>
+            
             <div class="container page__container" style="margin-top: 40px;">
                     <div class="page-headline text-center">
                         <h2>Review your scores</h2>
@@ -204,7 +226,7 @@
                         </p>
                     </div>
             </div>
-            
+            <button class="btn btn-primary" id="save-btn" onclick="saveResults()">Save Results</button>
             <button class="btn btn-primary" id="print-btn" onclick="myPrint()">Print or Download Page</button>
             <div class="container page__container page-section d-flex flex-column">                
                 <p class="text-50 small mt-n1 mb-0">Copyright {% now 'Y' %} &copy; All rights reserved.</p>
@@ -365,7 +387,6 @@
             mydata.push(pairs)
         }
         console.log(mydata)
-        makeRequest({'objects':mydata},"/accounts/save-results/")
         // let's save the results right here
         window.results = mydata;
         Morris.Bar({
@@ -398,23 +419,37 @@ function makeRequest(data,url){
    axios.post(url,data)
       .then(function (response) {
         console.log(response);
-        if(response.data.success){    
+        if(response.data.success){   
+            toast("Results saved successfully!",3000);
         }else{
+            toast("Sorry,We could not save results",3000);
         }
       })
       .catch(function (error) {
+        toast("Sorry,We could not save results",3000);
         if (exists(error.response)){
               console.log(error.response.data)
           }
       });
 }
-function exists(ele){
+        function exists(ele){
             if (ele !== null && ele !== undefined){return true}else{return false}
         }
         function myPrint() {
-            document.getElementById('print-btn').style.display = "none"
-            window.print();
-            }
+        document.getElementById('print-btn').style.display = "none";
+        document.getElementById('save-btn').style.display = "none";
+        window.print();
+        }
+            function toast(msg,time) {
+        var x = document.getElementById("toast");
+        x.innerHTML = msg;
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, time);
+        }
+
+        function saveResults(){
+            makeRequest({'objects':window.results},"/accounts/save-results/")
+        }
     </script>
 
 
