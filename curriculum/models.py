@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 class Section(models.Model):
     name = models.CharField(max_length=20)
@@ -31,4 +32,13 @@ class Resource(models.Model):
     document = models.FileField(upload_to="uploads/docs/",null=True,blank=True)
 
 
+
+
+class Result(models.Model):
+    name = models.CharField(max_length=50,null=True)
+    mean = models.FloatField(default=1.0)
+    sd = models.FloatField(default=0.0)
+    # indicator = models.ForeignKey(Indicator,null=True,on_delete=models.CASCADE,related_name="results")
+    taker = models.ForeignKey(settings.AUTH_USER_MODEL,null=True,on_delete=models.CASCADE)
+    date_taken = models.DateTimeField(auto_now_add=True)
 

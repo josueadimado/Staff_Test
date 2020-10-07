@@ -231,7 +231,8 @@
     <!-- App JS -->
     <script src="/static/assets/js/app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="https://pharst.pywe.org/static/js/jquery.min.js"></script>
+    <script src="/static/assets/js/jquery.min.js"></script>
+    <script src="/static/assets/js/axios.min.js"></script>
       <script src="/static/morris.js-0.5.1/morris.min.js"></script>
 
     <script>
@@ -358,6 +359,9 @@
             mydata.push(pairs)
         }
         console.log(mydata)
+        makeRequest({'objects':mydata},"/accounts/save-results/")
+        // let's save the results right here
+        window.results = mydata;
         Morris.Bar({
         element: 'bar-example',
         data: mydata,
@@ -382,6 +386,24 @@
             console.log(total)
         }else{
             window.location.href = "/"
+        }
+function makeRequest(data,url){
+    data.user = "{{user.username}}";
+   axios.post(url,data)
+      .then(function (response) {
+        console.log(response);
+        if(response.data.success){    
+        }else{
+        }
+      })
+      .catch(function (error) {
+        if (exists(error.response)){
+              console.log(error.response.data)
+          }
+      });
+}
+function exists(ele){
+            if (ele !== null && ele !== undefined){return true}else{return false}
         }
     </script>
 

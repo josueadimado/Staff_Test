@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from curriculum.models import Indicator
+import json
+from django.views.decorators.csrf import csrf_exempt
+from .models import CustomUser
+from curriculum.models import Result
 
 # Create your views here.
 def tologin(request):
@@ -88,3 +92,31 @@ def mylogin(request):
         args['title']='Login'
         return render(request,'accounts/login.html',args)
 
+
+@csrf_exempt
+def saveResults(request):
+    json_data = json.loads(str(request.body, encoding='utf-8'))
+    objects = {}
+    for key,val in json_data.items():
+        objects[key]=val
+    data = {}
+
+    try:
+        user = CustomUser.objects.get(username=objects['user'])
+    except Exception as e:
+        data['success']=False
+        data['message']=str(e)
+        dump = json.dumps(data)
+        return HttpResponse(dump, content_type='application/json')
+    # lets create result for each one
+    for each in objects['objects']:
+        res = Result()
+        res.name = each['y']
+        res.mean = each['a']
+        res.sd = each['b']
+        res.taker = user
+        res.save()
+    data['success']=True
+    data['message']="Results saved!"
+    dump = json.dumps(data)
+    return HttpResponse(dump, content_type='application/json')

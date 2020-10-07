@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^accounts/index/$', views.index, name="index"),
     url(r'^accounts/test/(?P<code>[-\w]+)/$', views.test, name="test"),
     url(r'^accounts/results/$', views.results, name="results"),
+    url(r'^accounts/save-results/$', views.saveResults, name="save-results"),
 ]
