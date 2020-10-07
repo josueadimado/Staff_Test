@@ -42,3 +42,6 @@ class Result(models.Model):
     taker = models.ForeignKey(settings.AUTH_USER_MODEL,null=True,on_delete=models.CASCADE)
     date_taken = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return "Mean of "+str(self.mean)+" and S.D of "+str(self.sd)
+
