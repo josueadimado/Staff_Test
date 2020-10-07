@@ -4,6 +4,9 @@ from django.conf import settings
 class Section(models.Model):
     name = models.CharField(max_length=20)
 
+    def __str__(self):
+        return str(self.name)
+
 # Create your models here.
 class Indicator(models.Model):
     section = models.ForeignKey(Section,null=True,on_delete=models.CASCADE,related_name="indicators")
