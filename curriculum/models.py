@@ -34,16 +34,20 @@ class Resource(models.Model):
     title = models.CharField(max_length=100,null=True,blank=True)
     document = models.FileField(upload_to="uploads/docs/",null=True,blank=True)
 
-
-
-
 class Result(models.Model):
+    institution = models.CharField(max_length=100,null=True)
+    comment = models.TextField(null=True)
+    taker = models.ForeignKey(settings.AUTH_USER_MODEL,null=True,on_delete=models.CASCADE)
+    date_taken = models.DateTimeField(auto_now_add=True)
+
+
+class ResultSection(models.Model):
     name = models.CharField(max_length=50,null=True)
     mean = models.FloatField(default=1.0)
     sd = models.FloatField(default=0.0)
     # indicator = models.ForeignKey(Indicator,null=True,on_delete=models.CASCADE,related_name="results")
-    taker = models.ForeignKey(settings.AUTH_USER_MODEL,null=True,on_delete=models.CASCADE)
-    date_taken = models.DateTimeField(auto_now_add=True)
+    result = models.ForeignKey(Result,null=True,on_delete=models.CASCADE,related_name="results")
+    
 
     def __str__(self):
         return "Mean of "+str(self.mean)+" and S.D of "+str(self.sd)

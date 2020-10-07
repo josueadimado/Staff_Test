@@ -5,7 +5,7 @@ from curriculum.models import Indicator
 import json
 from django.views.decorators.csrf import csrf_exempt
 from .models import CustomUser
-from curriculum.models import Result
+from curriculum.models import Result,ResultSection
 
 # Create your views here.
 def tologin(request):
@@ -108,13 +108,19 @@ def saveResults(request):
         data['message']=str(e)
         dump = json.dumps(data)
         return HttpResponse(dump, content_type='application/json')
+    # lets create a result
+    r = Result()
+    r.institution = objects['institution']
+    r.comment = objects['comment']
+    r.taker = user
+    r.save()
     # lets create result for each one
     for each in objects['objects']:
-        res = Result()
+        res = ResultSection()
         res.name = each['y']
         res.mean = each['a']
         res.sd = each['b']
-        res.taker = user
+        res.result = r
         res.save()
     data['success']=True
     data['message']="Results saved!"
