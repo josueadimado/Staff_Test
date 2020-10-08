@@ -441,6 +441,7 @@ function makeRequest(data,url){
         console.log(response);
         if(response.data.success){   
             toast("Results saved successfully!",3000);
+            document.getElementById('save-btn').style.display = "none";
         }else{
             toast("Sorry,We could not save results",3000);
         }
@@ -490,15 +491,6 @@ function makeRequest(data,url){
                 }
                 return obj
         }
-        // function mysubmit(){
-        //     // $("#evaluation-form").submit()
-        //     toast("Saving results...",3000)
-        // var form = buildForm("evaluation-form");
-        // const ddata = window.results;
-        // const old = {'objects':ddata}
-        // const tosend = $.extend(old, form)
-        // makeRequest(tosend,"/accounts/save-results/")
-        // }
     </script>
 
 
