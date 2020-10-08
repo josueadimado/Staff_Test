@@ -20,7 +20,7 @@ class StatementAdmin(admin.ModelAdmin):
     inlines = [ResourceInline,]  
 
 class ResultAdmin(admin.ModelAdmin):
-    readonly_fields = ['name','mean','sd','taker']
+    readonly_fields = ['name','mean','sd']
 
 
 # Register your models here.
