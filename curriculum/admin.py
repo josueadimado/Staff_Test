@@ -19,8 +19,15 @@ class StatementAdmin(admin.ModelAdmin):
     model = IndicatorStatement
     inlines = [ResourceInline,]  
 
-class ResultAdmin(admin.ModelAdmin):
+class ResultSectionInline(admin.ModelAdmin):
+    model = ResultSection
     readonly_fields = ['name','mean','sd']
+    extra = 0
+
+
+class ResultAdmin(admin.ModelAdmin):
+    model = Result
+    inlines = [ResultSectionInline,]
 
 
 # Register your models here.
