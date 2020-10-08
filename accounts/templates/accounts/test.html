@@ -246,12 +246,14 @@
 		var url = window.location.pathname
 		var current = url.split("/")[3]
 		if(current === "A1"){
-			window.scores = {}
+			window.scores = {};
+			localStorage.setItem("scores",JSON.stringify(window.scores));
 		}else{		
 			window.scores = JSON.parse(myscore)
 		}
 	}else{
-	window.scores = {}
+	window.scores = {};
+	localStorage.setItem("scores",JSON.stringify(window.scores))
 	};
 
 </script>
