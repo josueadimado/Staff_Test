@@ -99,7 +99,12 @@
 	                                            <input type="checkbox" name="terms" id="verify" value="Yes" class="required">
 	                                            <span class="checkmark"></span>
 	                                        </label>
-	                                    </div>
+										</div>
+									{% if indicator.code == "A1" %}
+										<a class="btn btn-warning" href="/test/B1/">Skip Entire Section</a>
+									{% elif indicator.code == "B1" %}
+										<a class="btn btn-warning" href="/test/C1/">Skip Entire Section</a>
+									{% endif %}
 	                                </div>
 	                                <!-- /step 1-->
 									{% for statement in indicator.questions.all %}
