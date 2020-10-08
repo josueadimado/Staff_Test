@@ -99,7 +99,14 @@
 	                                            <input type="checkbox" name="terms" id="verify" value="Yes" class="required">
 	                                            <span class="checkmark"></span>
 	                                        </label>
-	                                    </div>
+										</div>
+									{% if indicator.code == "A1" %}
+										<a class="btn btn-warning" href="/accounts/test/B1/">Skip Entire Section A</a>
+									{% elif indicator.code == "B1" %}
+										<a class="btn btn-warning" href="/accounts/test/C1/">Skip Entire Section B</a>
+									{% elif indicator.code == "C1" %}
+									<a class="btn btn-warning" href="/accounts/results/">Skip Entire Section C</a>
+									{% endif %}
 	                                </div>
 	                                <!-- /step 1-->
 									{% for statement in indicator.questions.all %}
@@ -239,12 +246,14 @@
 		var url = window.location.pathname
 		var current = url.split("/")[3]
 		if(current === "A1"){
-			window.scores = {}
+			window.scores = {};
+			localStorage.setItem("scores",JSON.stringify(window.scores));
 		}else{		
 			window.scores = JSON.parse(myscore)
 		}
 	}else{
-	window.scores = {}
+	window.scores = {};
+	localStorage.setItem("scores",JSON.stringify(window.scores))
 	};
 
 </script>
