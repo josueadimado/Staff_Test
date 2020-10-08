@@ -219,7 +219,7 @@
                 <textarea placeholder="Please input your comment about the results" rows="3" name="comment" class="form-control"></textarea>
                 </div>
                 <div class="col-6">
-                    <input class="btn btn-primary" type="submit" value="Submit Results" />    
+                    <button class="btn btn-primary" type="button" onclick="mysubmit()">Submit Results</button>    
                 </div>
             </form>
                 <p>Comments given by {{user.first_name}} {{user.last_name}}</p>
@@ -250,7 +250,7 @@
 
 
     <!-- jQuery -->
-    <script src="/static/assets/vendor/jquery.min.js"></script>
+    <script src="/static/assets/js/jquery.min.js"></script>
 
     <!-- Bootstrap -->
     <script src="/static/assets/vendor/popper.min.js"></script>
@@ -260,7 +260,7 @@
     <script src="/static/assets/vendor/perfect-scrollbar.min.js"></script>
 
     <!-- DOM Factory -->
-    <!-- <script src="/static/assets/vendor/dom-factory.js"></script> -->
+    <script src="/static/assets/vendor/dom-factory.js"></script>
 
     <!-- MDK -->
     <script src="/static/assets/vendor/material-design-kit.js"></script>
@@ -269,9 +269,9 @@
     <script src="/static/assets/vendor/fix-footer.js"></script>
 
     <!-- App JS -->
-    <!-- <script src="/static/assets/js/app.js"></script> -->
+    <script src="/static/assets/js/app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="/static/assets/js/jquery.min.js"></script>
+    
     <script src="/static/assets/js/axios.min.js"></script>
       <script src="/static/morris.js-0.5.1/morris.min.js"></script>
 
@@ -481,6 +481,9 @@ function makeRequest(data,url){
 
                 }
                 return obj
+        }
+        function mysubmit(){
+            $("#evaluation-form").submit()
         }
     </script>
 
