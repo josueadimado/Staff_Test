@@ -40,6 +40,9 @@ class Result(models.Model):
     taker = models.ForeignKey(settings.AUTH_USER_MODEL,null=True,on_delete=models.CASCADE)
     date_taken = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.institution
+
 
 class ResultSection(models.Model):
     name = models.CharField(max_length=50,null=True)
