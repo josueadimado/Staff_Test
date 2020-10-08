@@ -212,14 +212,16 @@
             <div class="container" style="margin-top: 40px;">
                 <form id="evaluation-form" action="#" method="dialog">
                     <div class="col-6">
+                        <label>Which institution are you evaluating?</label>
                         <input class="form-control" name="institution" placeholder="Which institution are you evaluating?" />
                     </div>
-                <label>Comment on the results obtained</label>
+                
                 <div class="col-6">
+                    <label>Comment on the results obtained</label>
                 <textarea placeholder="Please input your comment about the results" rows="3" name="comment" class="form-control"></textarea>
                 </div>
                 <div class="col-6">
-                    <button class="btn btn-primary" onclick="mysubmit()">Submit Results</button>    
+                    <button id="save-btn" class="btn btn-primary">Submit Results</button>    
                 </div>
             </form>
                 <p>Comments given by {{user.first_name}} {{user.last_name}}</p>
