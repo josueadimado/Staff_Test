@@ -219,7 +219,7 @@
                 <textarea placeholder="Please input your comment about the results" rows="3" name="comment" class="form-control"></textarea>
                 </div>
                 <div class="col-6">
-                    <button class="btn btn-primary" type="button" onclick="mysubmit()">Submit Results</button>    
+                    <button class="btn btn-primary" onclick="mysubmit()">Submit Results</button>    
                 </div>
             </form>
                 <p>Comments given by {{user.first_name}} {{user.last_name}}</p>
@@ -483,7 +483,13 @@ function makeRequest(data,url){
                 return obj
         }
         function mysubmit(){
-            $("#evaluation-form").submit()
+            // $("#evaluation-form").submit()
+            toast("Saving results...",3000)
+        var form = buildForm("evaluation-form");
+        const ddata = window.results;
+        const old = {'objects':ddata}
+        const tosend = $.extend(old, form)
+        makeRequest(tosend,"/accounts/save-results/")
         }
     </script>
 
