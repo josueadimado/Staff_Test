@@ -4,4 +4,5 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class CustomUser(AbstractUser):
-    recover_token = models.CharField(max_length=60,null=True)
+    full_name = models.CharField(max_length=100,null=True,blank=True)
+    recover_token = models.CharField(max_length=60,null=True,blank=True)
