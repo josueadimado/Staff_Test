@@ -49,7 +49,7 @@ def register(request):
             messages.error(request,str(e))
         else:
             messages.success(request,"Successfully registered. Please login now.")
-            return redirect('/accounts/register/')
+            return redirect('/accounts/login/')
         return redirect('/accounts/register/')
     return redirect('/accounts/register/')
     
