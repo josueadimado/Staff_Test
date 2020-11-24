@@ -32,7 +32,7 @@ def register(request):
     try:
         username = request.POST["username"]
         full_name = request.POST["full_name"]
-        email = request.POST["emali"]
+        email = request.POST["email"]
         password = request.POST["password"]
     except Exception as e:
         messages.error(request,str(e)+" is required")
