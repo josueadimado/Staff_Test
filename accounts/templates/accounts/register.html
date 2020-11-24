@@ -34,11 +34,23 @@
                             <p>Register to create an account</p>
                         </div>                            
                         <div class="fxt-form"> 
-                            <form method="POST">
+                            <form method="POST" action="/accounts/register/">
+                                {% for message in messages %}
+                                {% if message.tags == "success" %}
+                                <p style="color:green;">{{message}}</p>
+                                {% else %}
+                                <p style="color:red;>{{message}}</p>
+                                {% endfor %}
+                                {% endfor %}
                                 {% csrf_token %}
                                 <div class="form-group"> 
                                     <div class="fxt-transformY-50 fxt-transition-delay-1">                                              
-                                        <input type="text" id="name" class="form-control" name="name" placeholder="Name" required="required">
+                                        <input type="text" id="name" class="form-control" name="username" placeholder="Username" required="required">
+                                    </div>
+                                </div>
+                                <div class="form-group"> 
+                                    <div class="fxt-transformY-50 fxt-transition-delay-1">                                              
+                                        <input type="text" id="name" class="form-control" name="full_name" placeholder="Full Name" required="required">
                                     </div>
                                 </div>
                                 <div class="form-group"> 
