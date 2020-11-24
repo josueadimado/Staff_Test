@@ -8,4 +8,5 @@ class CustomUserAdmin(UserAdmin):
 
 # Register your models here.
 admin.site.register(CustomUser,CustomUserAdmin)
+admin.site.register(Email)
 
