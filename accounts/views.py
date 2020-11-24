@@ -76,8 +76,9 @@ def forgot(request):
             user.save()
             try:
                 email_users_only_emails([email],"Forgot Password",{"user":user,"token":token})
-            except:
-                pass
+            except Exception as e:
+                messages.error(request,str(e))
+                return redirect("/accounts/forgot-password/")
             messages.success(request,"Please check your mail for further instructions")
             return redirect("/accounts/forgot-password/")
         return redirect("/accounts/forgot-password/")
