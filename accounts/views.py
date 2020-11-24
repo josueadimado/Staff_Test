@@ -59,9 +59,9 @@ def forgot(request):
         template_name = "accounts/forgot-password.html"
         args = {}
         return render(request,template_name,args)
-     try:
+    try:
         email = request['email']
-     except Exception as e:
+    except Exception as e:
         messages.error(request,str(e)+" is required")
         return redirect("/accounts/forgot-password/")
     else:
