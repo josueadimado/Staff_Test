@@ -36,6 +36,13 @@
                         </div>                            
                         <div class="fxt-form"> 
                             <form method="POST" action="/accounts/login/">
+                                {% for message in messages %}
+                                {% if message.tags == "success" %}
+                                <p style="color:green;">{{message}}</p>
+                                {% else %}
+                                <p style="color:red;">{{message}}</p>
+                                {% endif %}
+                                {% endfor %}
                                 {% csrf_token %}
                                 <div class="form-group"> 
                                     <div class="fxt-transformY-50 fxt-transition-delay-1">                                              
