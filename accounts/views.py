@@ -25,9 +25,32 @@ def forgot(request):
 
 
 def register(request):
-    template_name = "accounts/register.html"
-    args = {}
-    return render(request,template_name,args)
+    if request.method == "GET":
+        template_name = "accounts/register.html"
+        args = {}
+        return render(request,template_name,args)
+    try:
+        username = request.POST["username"]
+        full_name = request.POST["full_name"]
+        email = request.POST["emali"]
+        password = request.POST["password"]
+    except Exception as e:
+        messages.error(request,str(e)+" is required")
+    else:
+        try:
+            user = CustomUser()
+            user.username = username
+            user.email = email
+            user.full_name = full_name
+            user.save()
+            user.set_password(password)
+            user.save()
+        except Exception as e:
+            messages.error(request,str(e))
+        else:
+            messages.success(request,"Successfully registered. Please login now.")
+            return redirect('/accounts/register/')
+    
 
 def index(request):
     template_name = "accounts/index.html"
