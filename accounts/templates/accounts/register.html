@@ -35,6 +35,7 @@
                         </div>                            
                         <div class="fxt-form"> 
                             <form method="POST">
+                                {% csrf_token %}
                                 <div class="form-group"> 
                                     <div class="fxt-transformY-50 fxt-transition-delay-1">                                              
                                         <input type="text" id="name" class="form-control" name="name" placeholder="Name" required="required">
