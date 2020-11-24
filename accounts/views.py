@@ -85,6 +85,42 @@ def forgot(request):
     return redirect("/accounts/forgot-password/")
             
             
+def reset_password(request,token):
+    if request.method == "GET":
+        try:
+            user = CustomUser.objects.get(recover_token=token)
+        except:
+            messages.error(request,"Wrong token provided, please resend mail")
+            return redirect("/accounts/forgot-password/")
+        else:
+            template = "accounts/reset-password.html"
+            args = {"token":token}
+            return render(request,template,args)
+        return render(request,template,args)
+    try:
+        user = CustomUser.objects.get(recover_token=token)
+    except:
+        messages.error(request,"Wrong token provided, please resend mail")
+        return redirect("/accounts/forgot-password/")
+    else:
+        try:
+            password = request.POST['password']
+        except:
+            messages.error(request,"Please enter new password")
+            return redirect("/accounts/reset-password/{}/".format(token))
+        try:
+            user.set_password(password)
+            user.save()
+        except:
+            messages.error(request,"Let password have mixture of letters and numbers")
+            return redirect("/accounts/reset-password/{}/".format(token))
+        else:
+            messages.success(request,"Password reset successful, please login now.")
+            return redirect("/")
+        return redirect("/accounts/reset-password/{}/".format(token))
+    return redirect("/accounts/reset-password/{}/".format(token))
+        
+            
         
      
 
