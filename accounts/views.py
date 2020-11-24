@@ -60,7 +60,7 @@ def forgot(request):
         args = {}
         return render(request,template_name,args)
     try:
-        email = request['email']
+        email = request.POST['email']
     except Exception as e:
         messages.error(request,str(e)+" is required")
         return redirect("/accounts/forgot-password/")
