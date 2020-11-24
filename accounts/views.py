@@ -50,7 +50,8 @@ def register(request):
         else:
             messages.success(request,"Successfully registered. Please login now.")
             return redirect('/accounts/register/')
-   return redirect('/accounts/register/')
+        return redirect('/accounts/register/')
+    return redirect('/accounts/register/')
     
 
 def index(request):
