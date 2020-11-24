@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^accounts/test/(?P<code>[-\w]+)/$', views.test, name="test"),
     url(r'^accounts/results/$', views.results, name="results"),
     url(r'^accounts/save-results/$', views.saveResults, name="save-results"),
+    url(r'^accounts/reset-password/(?P<token>[-\w]+)/$', views.reset_password, name="reset-password"),
 ]
