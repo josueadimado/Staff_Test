@@ -6,6 +6,42 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from .models import CustomUser
 from curriculum.models import Result,ResultSection
+from random import choice
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from accounts.models import Email
+import os
+
+
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+def gen_referral(length):
+    token = ''.join([choice('ABCDEFGHIabcdefgJKLMNOPQRSTUVWXYZhijklmnopqrstuvwxyz0123456789') for i in range(length)])
+    return token
+
+def email_users_only_emails(emails,email_subject,extra_args):
+    for email in emails:
+        email = email
+        welcome_mail = Email.objects.get(subject=email_subject)
+        path = os.path.join(BASE_DIR, 'accounts/templates/')
+        email_html = open(path+"welcome_email.html", "w+")
+        email_txt = open(path+"welcome_email.txt", "w+")
+        email_html.write(welcome_mail.body)
+        email_txt.write(welcome_mail.text)
+        email_html.close()
+        email_txt.close()
+        msg_plain = render_to_string('welcome_email.txt',extra_args)
+
+        msg_html = render_to_string('welcome_email.html', extra_args)
+        subject = welcome_mail.subject
+        send_mail(
+        subject,
+        msg_plain,
+        'pythonwithellie@gmail.com',
+        [email],
+        html_message=msg_html,
+        fail_silently=False,)
 
 # Create your views here.
 def tologin(request):
@@ -19,9 +55,37 @@ def tologin(request):
 
 
 def forgot(request):
-    template_name = "accounts/forgot-password.html"
-    args = {}
-    return render(request,template_name,args)
+    if request.method == "GET":
+        template_name = "accounts/forgot-password.html"
+        args = {}
+        return render(request,template_name,args)
+     try:
+        email = request['email']
+     except Exception as e:
+        messages.error(request,str(e)+" is required")
+        return redirect("/accounts/forgot-password/")
+    else:
+        try:
+            user = CustomUser.objects.get(email=email)
+        except:
+            messages.error(request,"We could not find your account, check the email")
+            return redirect("/accounts/forgot-password/")
+        else:
+            token = gen_referral(30)
+            user.recover_token = token
+            user.save()
+            try:
+                email_users_only_emails([email],"Forgot Password",{"user":user,"token":token})
+            except:
+                pass
+            messages.success(request,"Please check your mail for further instructions")
+            return redirect("/accounts/forgot-password/")
+        return redirect("/accounts/forgot-password/")
+    return redirect("/accounts/forgot-password/")
+            
+            
+        
+     
 
 
 def register(request):
