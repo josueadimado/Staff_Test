@@ -100,7 +100,7 @@ function getVals(formControl, controlType) {
 			var name = $(formControl).prop('name');
 			var value = $(formControl).val();
 			console.log($(formControl));
-			var quest = $(".main_question").text()
+			var quest = $(".mb-4").text()
 			console.log(quest,value);
 			
 			window.value = value;
