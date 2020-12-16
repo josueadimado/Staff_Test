@@ -99,9 +99,23 @@ function getVals(formControl, controlType) {
 			// Get the value for a radio
 			var name = $(formControl).prop('name');
 			var value = $(formControl).val();
-			console.log($(formControl));
+			// check if we are on the last answer 
+			var old = JSON.parse(localStorage.getItem("quests"));
+			var list = old[""+name];
+			if(window.answers[""+name].length < list.length){
+			window.answers[""+name].push(value);
+			}else{
+			// we have our final answer, let's save
+			window.answers[""+name].push(value);
+			var old_answers = JSON.parse(localStorage.getItem("answers")) || {};
+			var mg = merge(old_answers,window.answers);
+			localStorage.setItem("answers",JSON.stringify(mg));
+			}
+			
+			console.log();
 			var quest = $(".mb-4").text()
 			console.log(quest,value);
+			console.log(window.myid);
 			
 			window.value = value;
 			window.name = name;
