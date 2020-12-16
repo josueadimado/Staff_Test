@@ -115,8 +115,6 @@ function getVals(formControl, controlType) {
 			console.log();
 			var quest = $(".mb-4").text()
 			console.log(quest,value);
-			console.log(window.myid);
-			
 			window.value = value;
 			window.name = name;
 			$("#question_2").text(value);
