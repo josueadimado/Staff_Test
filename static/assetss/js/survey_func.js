@@ -112,7 +112,7 @@ function getVals(formControl, controlType) {
 			localStorage.setItem("answers",JSON.stringify(mg));
 			}
 			
-			console.log();
+			console.log(window.answers);
 			var quest = $(".mb-4").text()
 			console.log(quest,value);
 			window.value = value;
