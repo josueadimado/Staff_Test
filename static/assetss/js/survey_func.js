@@ -102,14 +102,14 @@ function getVals(formControl, controlType) {
 			// check if we are on the last answer 
 			var old = JSON.parse(localStorage.getItem("quests"));
 			var list = old[""+name];
-			if(window.answers[""+name].length < list.length){
-			window.answers[""+name].push(value);
-			}else{
+			if(window.answers[""+name].length == list.length){
 			// we have our final answer, let's save
 			window.answers[""+name].push(value);
 			var old_answers = JSON.parse(localStorage.getItem("answers")) || {};
 			var mg = merge(old_answers,window.answers);
 			localStorage.setItem("answers",JSON.stringify(mg));
+			}else{
+			window.answers[""+name].push(value);
 			}
 			
 			console.log(window.answers);
