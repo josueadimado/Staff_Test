@@ -26,6 +26,9 @@
 
     <!-- YOUR CUSTOM CSS -->
     <link href="/static/assetss/css/custom.css" rel="stylesheet">
+	<script>
+	window.questions = {};
+	</script>
 
 </head>
 
@@ -117,6 +120,16 @@
 									{% else %}
 	                                <div class="step">
 									{% endif %}
+									{% if forloop.last%}
+									<script>
+										window.questions[''+"{{indicator.code}}"] = []
+										window.questions[''+"{{indicator.code}}"].push("{{statement.statement}}");
+									</script>
+									{% else %}
+									<script>
+										window.questions[''+"{{indicator.code}}"].push("{{statement.statement}}");
+									</script>
+									{% endif %}
 									{% for doc in statement.resources.all %}
 									<div class="form-group terms">
 										<label class="container_check">Please read and verify this  <a href="{{doc.document.url}}" target="_" style="color:#fff; text-decoration: underline;">Document</a> to score the statements that follow 
@@ -126,6 +139,7 @@
 									</div>
 									{% endfor%}
 	                                    <h3 class="main_question mb-4">{{statement.statement}}</h3>
+						
 										
 										<div class="review_block">
 	                                        <ul>
@@ -235,6 +249,7 @@
 <!-- Wizard script -->
 <script src="/static/assetss/js/survey_func.js"></script>
 <script>
+	
 	window.total = parseInt("{{total}}");
 	window.indicator = "{{indicator.code}}";
 	window.next = "{{next}}";
