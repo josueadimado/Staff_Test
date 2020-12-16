@@ -99,7 +99,8 @@ function getVals(formControl, controlType) {
 			// Get the value for a radio
 			var name = $(formControl).prop('name');
 			var value = $(formControl).val();
-			console.log(value)
+			console.log($(formControl));
+			console.log(value);
 			window.value = value;
 			window.name = name;
 			$("#question_2").text(value);
