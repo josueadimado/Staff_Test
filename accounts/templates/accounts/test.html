@@ -120,7 +120,7 @@
 									{% else %}
 	                                <div class="step">
 									{% endif %}
-									{% if forloop.last%}
+									{% if forloop.first%}
 									<script>
 										window.questions[''+"{{indicator.code}}"] = []
 										window.questions[''+"{{indicator.code}}"].push("{{statement.statement}}");
