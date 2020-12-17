@@ -264,11 +264,11 @@
 		var current = url.split("/")[3]
 		if(current === "A1"){
 			window.scores = {};
-// 			window.questions = {};
-// 			window.answers = {};
+			window.questions = {};
+			window.answers = {};
 			localStorage.setItem("scores",JSON.stringify(window.scores));
-// 			localStorage.setItem("quests",JSON.stringify(window.questions));
-// 			localStorage.setItem("answers",JSON.stringify(window.answers));
+			localStorage.setItem("quests",JSON.stringify(window.questions));
+			localStorage.setItem("answers",JSON.stringify(window.answers));
 			
 		}else{		
 			window.scores = JSON.parse(myscore)
