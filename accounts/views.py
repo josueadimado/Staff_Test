@@ -258,6 +258,13 @@ def saveResults(request):
         res.sd = each['b']
         res.result = r
         res.save()
+     for each in objects['reviews']:
+        res = ReviewAnswer()
+        res.question = each['question']
+        res.answer = each['answer']
+        res.strength = each['strength']
+        res.result = r
+        res.save()
     data['success']=True
     data['message']="Results saved!"
     dump = json.dumps(data)
