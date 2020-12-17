@@ -258,7 +258,7 @@ def saveResults(request):
         res.sd = each['b']
         res.result = r
         res.save()
-     for each in objects['reviews']:
+    for each in objects['reviews']:
         res = ReviewAnswer()
         res.question = each['question']
         res.answer = each['answer']
