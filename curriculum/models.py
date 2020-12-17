@@ -60,5 +60,6 @@ class ReviewAnswer(models.Model):
     question = models.TextField(null=True)
     answer = models.CharField(max_length=20,null=True)
     strength = models.IntegerField(default=1)
+    indicator = models.ForeignKey(Indicator,null=True,on_delete=models.CASCADE,related_name="results")
     result = models.ForeignKey(Result,null=True,on_delete=models.CASCADE,related_name="reviews")
     
