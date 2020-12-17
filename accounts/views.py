@@ -160,6 +160,16 @@ def index(request):
     args = {}
     return render(request,template_name,args)
 
+
+def review(request):
+    if request.user.is_superuser:
+        template_name = "accounts/review.html"
+        args = {}
+        return render(request,template_name,args)
+    else:
+        messages.error(request,"You have no permission")
+        return redirect("/")
+
 def next(li,element):
     running = True
     idx = li.index(element)
