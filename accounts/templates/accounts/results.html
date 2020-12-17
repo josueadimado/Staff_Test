@@ -494,7 +494,7 @@ function makeRequest(data,url){
         }
 	    
 var answers = JSON.parse(localStorage.getItem("answers")) || {};
-var questions = JSON.parse(localStorage.getItem("questions")) || {};
+var questions = JSON.parse(localStorage.getItem("quests")) || {};
 var quest_answers = [];
 for (var key in questions) {
     if (questions.hasOwnProperty(key)) {
