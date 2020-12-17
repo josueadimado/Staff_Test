@@ -263,6 +263,13 @@ def saveResults(request):
         res.question = each['question']
         res.answer = each['answer']
         res.strength = each['strength']
+        #indicator
+        try:
+            i = Indicator.objects.get(code=each['section'])
+        except:
+            pass
+        else:
+            res.indicator = i
         res.result = r
         res.save()
     data['success']=True
