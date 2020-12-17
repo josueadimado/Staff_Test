@@ -54,4 +54,19 @@ class ResultSection(models.Model):
 
     def __str__(self):
         return "Mean of "+str(self.mean)+" and S.D of "+str(self.sd)
+    
+class Review(models.Model):
+    institution = models.CharField(max_length=100,null=True)
+    comment = models.TextField(null=True)
+    taker = models.ForeignKey(settings.AUTH_USER_MODEL,null=True,on_delete=models.CASCADE)
+    date_taken = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.institution
+    
+class ReviewAnswer(models.Model):
+    question = models.TextField(null=True)
+    answer = models.CharField(max_length=20,null=True)
+    strength = models.IntegerField(default=1)
+    review = models.ForeignKey(Review,null=True,on_delete=models.CASCADE,related_name="reviews")
+    
