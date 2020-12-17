@@ -48,7 +48,19 @@
 					}else{
 						window.scores[window.name] = parseInt(window.value)
 					}
-					console.log(window.scores[window.name])
+					console.log(window.scores[window.name]);
+					// check if we are on the last answer 
+					var old = JSON.parse(localStorage.getItem("quests"));
+					var list = old[""+name];
+					window.answers[""+name].push(parseInt(window.value));
+					if(window.answers[""+name].length == list.length){
+					// we have our final answer, let's save
+					var old_answers = JSON.parse(localStorage.getItem("answers")) || {};
+					var mg = merge(old_answers,window.answers);
+					localStorage.setItem("answers",JSON.stringify(mg));
+					}
+
+					console.log(window.answers);
 				}
 				$("#location").text("(" + state.stepsComplete + "/" + state.stepsPossible + ")");
 			}
@@ -99,18 +111,7 @@ function getVals(formControl, controlType) {
 			// Get the value for a radio
 			var name = $(formControl).prop('name');
 			var value = $(formControl).val();
-			// check if we are on the last answer 
-			var old = JSON.parse(localStorage.getItem("quests"));
-			var list = old[""+name];
-			window.answers[""+name].push(value);
-			if(window.answers[""+name].length == list.length){
-			// we have our final answer, let's save
-			var old_answers = JSON.parse(localStorage.getItem("answers")) || {};
-			var mg = merge(old_answers,window.answers);
-			localStorage.setItem("answers",JSON.stringify(mg));
-			}
 			
-			console.log(window.answers);
 			var quest = $(".mb-4").text()
 			console.log(quest,value);
 			window.value = value;
