@@ -473,7 +473,8 @@ function makeRequest(data,url){
         toast("Saving results...",3000)
         var form = buildForm("evaluation-form");
         const ddata = window.results;
-        const old = {'objects':ddata}
+	var rev = JSON.parse(localStorage.getItem("review")) || [];
+        const old = {'objects':ddata,'reviews':rev}
         const tosend = $.extend(old, form)
         makeRequest(tosend,"/accounts/save-results/")
         // post(baseUrl + '/stakes/send-file', form)
