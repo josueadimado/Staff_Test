@@ -49,6 +49,11 @@
 						window.scores[window.name] = parseInt(window.value)
 					}
 					console.log(window.scores[window.name]);
+					// save the questions
+					var old = JSON.parse(localStorage.getItem("quests")) || {};
+					var m = merge(old,window.questions)
+					localStorage.setItem("quests",JSON.stringify(m));
+					console.log(m);
 					// check if we are on the last answer 
 					var old = JSON.parse(localStorage.getItem("quests"));
 					var list = old[""+name];
@@ -77,13 +82,7 @@
 			}
 		});
 	});
-		$('#wrapped').on('submit',function(){
-		// save the questions
-		var old = JSON.parse(localStorage.getItem("quests")) || {};
-		var m = merge(old,window.questions)
-		localStorage.setItem("quests",JSON.stringify(m));
-		console.log(m);
-			
+		$('#wrapped').on('submit',function(){	
 		var old = JSON.parse(localStorage.getItem("quests"));
 		var list = old[""+name];
 		window.answers[""+name].push(parseInt(window.value));
