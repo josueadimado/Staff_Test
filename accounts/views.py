@@ -5,7 +5,7 @@ from curriculum.models import Indicator
 import json
 from django.views.decorators.csrf import csrf_exempt
 from .models import CustomUser
-from curriculum.models import Result,ResultSection
+from curriculum.models import *
 from random import choice
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
