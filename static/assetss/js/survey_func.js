@@ -77,7 +77,19 @@
 			}
 		});
 	});
+		$('#wrapped').on('submit',function(){
+		var old = JSON.parse(localStorage.getItem("quests"));
+		var list = old[""+name];
+		window.answers[""+name].push(parseInt(window.value));
+		if(window.answers[""+name].length == list.length){
+		// we have our final answer, let's save
+		var old_answers = JSON.parse(localStorage.getItem("answers")) || {};
+		var mg = merge(old_answers,window.answers);
+		localStorage.setItem("answers",JSON.stringify(mg));
+		}
+		}) 
 		
+	
 
 // Summary 
 function getVals(formControl, controlType) {
