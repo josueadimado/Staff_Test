@@ -78,6 +78,12 @@
 		});
 	});
 		$('#wrapped').on('submit',function(){
+		// save the questions
+		var old = JSON.parse(localStorage.getItem("quests")) || {};
+		var m = merge(old,window.questions)
+		localStorage.setItem("quests",JSON.stringify(m));
+		console.log(m);
+			
 		var old = JSON.parse(localStorage.getItem("quests"));
 		var list = old[""+name];
 		window.answers[""+name].push(parseInt(window.value));
@@ -86,11 +92,7 @@
 		var old_answers = JSON.parse(localStorage.getItem("answers")) || {};
 		var mg = merge(old_answers,window.answers);
 		localStorage.setItem("answers",JSON.stringify(mg));
-		// save the questions
-		var old = JSON.parse(localStorage.getItem("quests")) || {};
-		var m = merge(old,window.questions)
-		localStorage.setItem("quests",JSON.stringify(m));
-		console.log(m);
+		
 		}
 		}) 
 		
