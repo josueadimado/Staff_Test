@@ -497,8 +497,9 @@ var answers = JSON.parse(localStorage.getItem("answers")) || {};
 var questions = JSON.parse(localStorage.getItem("quests")) || {};
 var quest_answers = [];
 for (var key in questions) {
+	console.log(questions[key])
+	console.log(answers[key])
     if (questions.hasOwnProperty(key)) {
-	    
 	    for(var i=0;i<questions[key].length;i++){
 	    var obj = {};
 	    obj['section']=key
@@ -506,9 +507,10 @@ for (var key in questions) {
 	    obj['answer']=answers[key][i];
 	    quest_answers.push(obj);
 	    }
-        console.log(quest_answers);
+        
     }
 }
+console.log(quest_answers);
     </script>
 
 
