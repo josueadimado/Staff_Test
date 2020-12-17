@@ -301,11 +301,7 @@ function merge () {
 
    return dst;
 }
-// save the questions
-var old = JSON.parse(localStorage.getItem("quests")) || {};
-var m = merge(old,window.questions)
-localStorage.setItem("quests",JSON.stringify(m));
-console.log(m);
+
 
 </script>
 
