@@ -494,12 +494,13 @@ function makeRequest(data,url){
                 return obj
         }
  
-var mapper = {
+ var mapper = {
         5:"Strongly Agree",
         4:"Agree",
         3:"Neutral",
         2:"Disagree",
-        1:"Stro 
+        1:"Strong Disagree"
+        }
 var answers = JSON.parse(localStorage.getItem("answers")) || {};
 var questions = JSON.parse(localStorage.getItem("quests")) || {};
 var quest_answers = [];
