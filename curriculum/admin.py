@@ -25,7 +25,7 @@ class ResultSectionInline(admin.TabularInline):
     extra = 0
 class ReviewSectionInline(admin.TabularInline):
     model = ReviewAnswer
-#     readonly_fields = ['name','mean','sd']
+    readonly_fields = ['question','answer','strength','indicator']
     extra = 0
 
 
