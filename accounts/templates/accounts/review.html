@@ -13,13 +13,20 @@
 
     </div>
     <script>
+        var map = {
+        5:"Strongly Agree",
+        4:"Agree",
+        3:"Neutral",
+        2:"Disagree",
+        1:"Strong Disagree"
+        }
         var review = JSON.parse(localStorage.getItem("review")) || [];
         for(var i=0; i<review.length;i++){
             var html = `<div style="padding:15px;border-radius:15px;" class="card col-lg-12 col-md-12 col-sm-12 shadow">
-            <p>Indicator ${review[i]['section']} question</p>
+            <h3>Indicator ${review[i]['section']} question</h3>
             <p>${review[i]['question']}</p>
-            <p><b style='color:green;'>Answer:</b>${review[i]['answer']}</p>
-            </div>`;
+            <p><b style='color:green;'>Answer:</b>${map[review[i]['answer']] - review[i]['answer']}</p>
+            </div><br>`;
             $("#review").append(html);
         }
     </script>
