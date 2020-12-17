@@ -493,7 +493,13 @@ function makeRequest(data,url){
                 }
                 return obj
         }
-	    
+ 
+var mapper = {
+        5:"Strongly Agree",
+        4:"Agree",
+        3:"Neutral",
+        2:"Disagree",
+        1:"Stro 
 var answers = JSON.parse(localStorage.getItem("answers")) || {};
 var questions = JSON.parse(localStorage.getItem("quests")) || {};
 var quest_answers = [];
@@ -505,7 +511,8 @@ for (var key in questions) {
 	    var obj = {};
 	    obj['section']=key
 	    obj['question']=questions[key][i];
-	    obj['answer']=answers[key][i];
+	    obj['answer']=mapper[answers[key][i]];
+	    obj['strength']=answers[key][i];
 	    quest_answers.push(obj);
 	    }
         
